@@ -1,0 +1,21 @@
+# secrets & certs
+.env
+*.pem
+certs_nginx/
+certs_sql/
+vault/certs/
+vault/file/
+
+# mysql data dirs (host-mounted)
+master/data/
+slave/data/
+mysql-replica-data/
+**/data/
+
+# misc
+*.log
+*.swp
+*.swo
+.DS_Store
+*.zip
+*.tar.gz

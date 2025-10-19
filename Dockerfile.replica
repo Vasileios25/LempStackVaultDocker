@@ -1,0 +1,18 @@
+FROM mysql:latest
+
+COPY slave/my.cnf /etc/mysql/my.cnf
+COPY slave/init.sql /docker-entrypoint-initdb.d/
+
+COPY /certs_sql/ca-cert.pem /etc/mysql/certs/ca-cert.pem
+COPY /certs_sql/client-cert.pem /etc/mysql/certs/client-cert.pem
+COPY /certs_sql/client-key.pem /etc/mysql/certs/client-key.pem
+
+RUN chown -R mysql:mysql /etc/mysql/certs 
+RUN chmod 600 /etc/mysql/certs/client-key.pem
+RUN chmod 644 /etc/mysql/certs/client-cert.pem
+RUN chmod 644 /etc/mysql/certs/ca-cert.pem
+
+EXPOSE 3306
+
+CMD ["mysqld"]
+
